@@ -1,17 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-import pkg_resources
 import sys
 import os
-
-
-try:
-    if int(pkg_resources.get_distribution("pip").version.split('.')[0]) < 6:
-        print('pip older than 6.0 not supported, please upgrade pip with:\n\n'
-              '    pip install -U pip')
-        sys.exit(-1)
-except pkg_resources.DistributionNotFound:
-    pass
 
 if os.environ.get('CONVERT_README'):
     import pypandoc
@@ -54,9 +44,9 @@ setup(name='thefuck',
       version=VERSION,
       description="Magnificent app which corrects your previous console command",
       long_description=long_description,
-      author='Vladimir Iakovlev',
-      author_email='nvbn.rm@gmail.com',
-      url='https://github.com/nvbn/thefuck',
+      author='spacechicken',
+      author_email='spacechicken@aur',
+      url='https://github.com/RonanHevenor/fuck',
       license='MIT',
       packages=find_packages(exclude=['ez_setup', 'examples',
                                       'tests', 'tests.*', 'release']),
