@@ -3,7 +3,6 @@ from setuptools import setup, find_packages
 import pkg_resources
 import sys
 import os
-import fastentrypoints
 
 
 try:
