@@ -1,11 +1,11 @@
-# The Fuck [![Version][version-badge]][version-link] [![Build Status][workflow-badge]][workflow-link] [![Coverage][coverage-badge]][coverage-link] [![MIT License][license-badge]](LICENSE.md)
+# Fuck [![Version][version-badge]][version-link] [![Build Status][workflow-badge]][workflow-link] [![Coverage][coverage-badge]][coverage-link] [![MIT License][license-badge]](LICENSE.md)
 
-*The Fuck* is a magnificent app, inspired by a [@liamosaur](https://twitter.com/liamosaur/)
+*Fuck* is a magnificent app, inspired by a [@liamosaur](https://twitter.com/liamosaur/)
 [tweet](https://twitter.com/liamosaur/status/506975850596536320),
 that corrects errors in previous console commands.
 
 
-Is *The Fuck* too slow? [Try the experimental instant mode!](#experimental-instant-mode)
+Is *Fuck* too slow? [Try the experimental instant mode!](#experimental-instant-mode)
 
 [![gif with examples][examples-link]][examples-link]
 
@@ -18,7 +18,7 @@ E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
 ➜ fuck
 sudo apt-get install vim [enter/↑/↓/ctrl+c]
-[sudo] password for nvbn:
+[sudo] password for RonanHevenor:
 Reading package lists... Done
 ...
 ```
@@ -86,7 +86,7 @@ E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
 
 ➜ fuck
 sudo apt-get install vim
-[sudo] password for nvbn:
+[sudo] password for RonanHevenor:
 Reading package lists... Done
 ...
 ```
@@ -114,41 +114,41 @@ Reading package lists... Done
 
 ## Installation
 
-On macOS or Linux, you can install *The Fuck* via [Homebrew][homebrew]:
+On macOS or Linux, you can install *Fuck* via [Homebrew][homebrew]:
 
 ```bash
-brew install thefuck
+yay -S fuck
 ```
 
-On Ubuntu / Mint, install *The Fuck* with the following commands:
+On Ubuntu / Mint, install *Fuck* with the following commands:
 ```bash
 sudo apt update
 sudo apt install python3-dev python3-pip python3-setuptools
-pip3 install thefuck --user
+pip3 install git+https://github.com/RonanHevenor/fuck.git --user
 ```
 
-On FreeBSD, install *The Fuck* with the following commands:
+On FreeBSD, install *Fuck* with the following commands:
 ```bash
 pkg install thefuck
 ```
 
-On ChromeOS, install *The Fuck* using [chromebrew](https://github.com/skycocker/chromebrew) with the following command:
+On ChromeOS, install *Fuck* using [chromebrew](https://github.com/skycocker/chromebrew) with the following command:
 ```bash
 crew install thefuck
 ```
 
-On Arch based systems, install *The Fuck* with the following command:
+On Arch based systems, install *Fuck* with the following command:
 ```
 sudo pacman -S thefuck
 ```
 
-On other systems, install *The Fuck*  by using `pip`:
+On other systems, install *Fuck*  by using `pip`:
 
 ```bash
-pip install thefuck
+pip install git+https://github.com/RonanHevenor/fuck.git
 ```
 
-[Alternatively, you may use an OS package manager (OS X, Ubuntu, Arch).](https://github.com/nvbn/thefuck/wiki/Installation)
+[Alternatively, you may use an OS package manager (OS X, Ubuntu, Arch).](https://github.com/RonanHevenor/fuck/wiki/Installation)
 
 <a href='#manual-installation' name='manual-installation'>#</a>
 It is recommended that you place this command in your `.bash_profile`,
@@ -160,7 +160,7 @@ eval $(thefuck --alias)
 eval $(thefuck --alias FUCK)
 ```
 
-[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/nvbn/thefuck/wiki/Shell-aliases)
+[Or in your shell config (Bash, Zsh, Fish, Powershell, tcsh).](https://github.com/RonanHevenor/fuck/wiki/Shell-aliases)
 
 Changes are only available in a new shell session. To make changes immediately
 available, run `source ~/.bashrc` (or your shell config file like `.zshrc`).
@@ -182,20 +182,20 @@ fuck -r
 ## Updating
 
 ```bash
-pip3 install thefuck --upgrade
+pip3 install git+https://github.com/RonanHevenor/fuck.git --upgrade
 ```
 
-**Note: Alias functionality was changed in v1.34 of *The Fuck***
+**Note: Alias functionality was changed in v1.34 of *Fuck***
 
 ## Uninstall
 
-To remove *The Fuck*, reverse the installation process:
+To remove *Fuck*, reverse the installation process:
 - erase or comment *thefuck* alias line from your Bash, Zsh, Fish, Powershell, tcsh, ... shell config
 - use your package manager (brew, pip3, pkg, crew, pip) to uninstall the binaries
 
 ## How it works
 
-*The Fuck* attempts to match the previous command with a rule. If a match is
+*Fuck* attempts to match the previous command with a rule. If a match is
 found, a new command is created using the matched rule and executed. The
 following rules are enabled by default:
 
@@ -372,7 +372,7 @@ The following rules are enabled by default on specific platforms only:
 * `pacman_not_found` &ndash; fixes package name with `pacman`, `yay`, `pikaur` or `yaourt`.
 * `yum_invalid_operation` &ndash; fixes invalid `yum` calls, like `yum isntall vim`;
 
-The following commands are bundled with *The Fuck*, but are not enabled by
+The following commands are bundled with *Fuck*, but are not enabled by
 default:
 
 * `git_push_force` &ndash; adds `--force-with-lease` to a `git push` (may conflict with `git_push_pull`);
@@ -429,15 +429,15 @@ priority = 1000  # Lower first, default is 1000
 requires_output = True
 ```
 
-[More examples of rules](https://github.com/nvbn/thefuck/tree/master/thefuck/rules),
-[utility functions for rules](https://github.com/nvbn/thefuck/tree/master/thefuck/utils.py),
-[app/os-specific helpers](https://github.com/nvbn/thefuck/tree/master/thefuck/specific/).
+[More examples of rules](https://github.com/RonanHevenor/fuck/tree/master/thefuck/rules),
+[utility functions for rules](https://github.com/RonanHevenor/fuck/tree/master/thefuck/utils.py),
+[app/os-specific helpers](https://github.com/RonanHevenor/fuck/tree/master/thefuck/specific/).
 
 ##### [Back to Contents](#contents)
 
 ## Settings
 
-Several *The Fuck* parameters can be changed in the file `$XDG_CONFIG_HOME/thefuck/settings.py`
+Several *Fuck* parameters can be changed in the file `$XDG_CONFIG_HOME/thefuck/settings.py`
 (`$XDG_CONFIG_HOME` defaults to `~/.config`):
 
 * `rules` &ndash; list of enabled rules, by default `thefuck.const.DEFAULT_RULES`;
@@ -519,14 +519,14 @@ thefuck_contrib_foo
   setup.py
 ```
 
-*The Fuck* will find rules located in the `rules` module.
+*Fuck* will find rules located in the `rules` module.
 
 ##### [Back to Contents](#contents)
 
 ## Experimental instant mode
 
-The default behavior of *The Fuck* requires time to re-run previous commands.
-When in instant mode, *The Fuck* saves time by logging output with [script](https://en.wikipedia.org/wiki/Script_(Unix)),
+The default behavior of *Fuck* requires time to re-run previous commands.
+When in instant mode, *Fuck* saves time by logging output with [script](https://en.wikipedia.org/wiki/Script_(Unix)),
 then reading the log.
 
 [![gif with instant mode][instant-mode-gif-link]][instant-mode-gif-link]
@@ -554,13 +554,13 @@ Project License can be found [here](LICENSE.md).
 
 [version-badge]:   https://img.shields.io/pypi/v/thefuck.svg?label=version
 [version-link]:    https://pypi.python.org/pypi/thefuck/
-[workflow-badge]:  https://github.com/nvbn/thefuck/workflows/Tests/badge.svg
-[workflow-link]:   https://github.com/nvbn/thefuck/actions?query=workflow%3ATests
-[coverage-badge]:  https://img.shields.io/coveralls/nvbn/thefuck.svg
-[coverage-link]:   https://coveralls.io/github/nvbn/thefuck
+[workflow-badge]:  https://github.com/RonanHevenor/fuck/workflows/Tests/badge.svg
+[workflow-link]:   https://github.com/RonanHevenor/fuck/actions?query=workflow%3ATests
+[coverage-badge]:  https://img.shields.io/coveralls/RonanHevenor/fuck.svg
+[coverage-link]:   https://coveralls.io/github/RonanHevenor/fuck
 [license-badge]:   https://img.shields.io/badge/license-MIT-007EC7.svg
-[examples-link]:   https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif
-[instant-mode-gif-link]:   https://raw.githubusercontent.com/nvbn/thefuck/master/example_instant_mode.gif
+[examples-link]:   https://raw.githubusercontent.com/RonanHevenor/fuck/master/example.gif
+[instant-mode-gif-link]:   https://raw.githubusercontent.com/RonanHevenor/fuck/master/example_instant_mode.gif
 [homebrew]:        https://brew.sh/
 
 ##### [Back to Contents](#contents)
