@@ -1,8 +1,6 @@
 # Fuck [![Version][version-badge]][version-link] [![Build Status][workflow-badge]][workflow-link] [![Coverage][coverage-badge]][coverage-link] [![MIT License][license-badge]](LICENSE.md)
 
-*Fuck* is a magnificent app, inspired by a [@liamosaur](https://twitter.com/liamosaur/)
-[tweet](https://twitter.com/liamosaur/status/506975850596536320),
-that corrects errors in previous console commands.
+*Fuck* is an actively maintained fork of the magnificent app [The Fuck](https://github.com/nvbn/thefuck) by [@nvbn](https://github.com/nvbn). It corrects errors in previous console commands.
 
 
 Is *Fuck* too slow? [Try the experimental instant mode!](#experimental-instant-mode)
