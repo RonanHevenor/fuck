@@ -26,6 +26,61 @@ def _parse_command(command):
     return command.split(" ")[0]
 
 
+def _get_history_command(parts):
+    """Extract the command name from a history segment."""
+    if not parts:
+        return ''
+    if parts[0] == 'sudo' and len(parts) > 1:
+        return parts[1]
+    return parts[0]
+
+
+def _parse_history_install(line):
+    """Extract the installed package and the command it was followed by."""
+    try:
+        from thefuck.shells import shell
+        segments = [
+            shell.split_command(segment)
+            for segment in re.split(r'\s*(?:&&|\|\||;)\s*', line)
+            if segment.strip()
+        ]
+    except Exception:
+        return None, None
+
+    if not segments:
+        return None, None
+
+    install = segments[0]
+    if install[:2] == ['sudo', 'pacman']:
+        start = 2
+    elif install[0] in ('pacman', 'yay', 'pikaur', 'yaourt'):
+        start = 1
+    else:
+        return None, None
+
+    try:
+        install_index = install.index('-S', start)
+    except ValueError:
+        return None, None
+
+    package = None
+    for token in install[install_index + 1:]:
+        if token.startswith('-'):
+            continue
+        package = token
+        break
+
+    if not package:
+        return None, None
+
+    for segment in segments[1:]:
+        invoked = _get_history_command(segment)
+        if invoked:
+            return package, invoked
+
+    return package, None
+
+
 @utils.memoize
 def _get_all_pacman_packages():
     """Cache the full list of package names from official repos."""
@@ -217,22 +272,18 @@ def get_history_package(command):
     except Exception:
         return []
 
-    install_pattern = re.compile(
-        r'(?:yay|pikaur|yaourt|sudo\s+pacman|pacman)\s+-S\s+(\S+)'
-    )
-
     packages = []
     for line in reversed(history):
-        # Match lines like: yay -S foo && cmd
-        # or standalone: yay -S foo
-        m = install_pattern.search(line)
-        if m:
-            pkg = m.group(1)
-            # Check if this install was associated with our command
-            if cmd in line and pkg not in packages:
-                packages.append(pkg)
-            if len(packages) >= 3:
-                break
+        pkg, invoked = _parse_history_install(line)
+        if not pkg:
+            continue
+
+        # A chained install explicitly ties the package to the invoked command.
+        # For standalone installs, only keep exact package-name matches.
+        if (invoked == cmd or (invoked is None and pkg == cmd)) and pkg not in packages:
+            packages.append(pkg)
+        if len(packages) >= 3:
+            break
 
     return packages
 

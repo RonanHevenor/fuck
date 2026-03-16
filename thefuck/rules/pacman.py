@@ -38,4 +38,5 @@ def get_new_command(command):
             for package in packages]
 
 
+priority = 3500
 enabled_by_default, pacman = archlinux_env()

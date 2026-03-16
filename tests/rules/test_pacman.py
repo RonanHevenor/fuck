@@ -1,6 +1,6 @@
 import pytest
 from mock import patch
-from thefuck.rules import pacman
+from thefuck.rules import no_command, pacman
 from thefuck.rules.pacman import match, get_new_command
 from thefuck.types import Command
 
@@ -80,3 +80,7 @@ def test_get_new_command(command, new_command, mocker):
 def test_get_new_command_mocked(subp_mock, command, new_command, return_value):
     subp_mock.check_output.return_value = return_value
     assert get_new_command(command) == new_command
+
+
+def test_priority_after_no_command():
+    assert pacman.priority > no_command.priority

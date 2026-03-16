@@ -72,3 +72,12 @@ class TestRerun(object):
         rerun._kill_process(proc)
         proc.kill.assert_called_once_with()
         logs_mock.debug.assert_called_once()
+
+    @patch('thefuck.output_readers.rerun.logs')
+    def test_kill_process_access_denied_on_executable_lookup(self, logs_mock):
+        proc = Mock(pid=42)
+        proc.kill.side_effect = AccessDenied()
+        proc.exe.side_effect = AccessDenied()
+        rerun._kill_process(proc)
+        logs_mock.debug.assert_called_once_with(
+            u'Rerun: process PID 42 (<unknown>) could not be terminated')

@@ -7,6 +7,13 @@ from .. import logs
 from ..conf import settings
 
 
+def _get_executable(proc):
+    try:
+        return proc.exe()
+    except Exception:
+        return '<unknown>'
+
+
 def _kill_process(proc):
     """Tries to kill the process otherwise just logs a debug message, the
     process will be killed when thefuck terminates.
@@ -18,7 +25,7 @@ def _kill_process(proc):
         proc.kill()
     except AccessDenied:
         logs.debug(u'Rerun: process PID {} ({}) could not be terminated'.format(
-            proc.pid, proc.exe()))
+            proc.pid, _get_executable(proc)))
 
 
 def _wait_output(popen, is_slow):
